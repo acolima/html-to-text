@@ -1,0 +1,14 @@
+:root {
+	background-color: #95a573;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+button {
+	all: unset;
+
+	cursor: pointer;
+}
