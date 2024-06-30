@@ -3,7 +3,11 @@ import NewParagraph from "./Paragraph/NewParagraph";
 import { useState } from "react";
 import NewTitle from "./Title/NewTitle";
 
-function Editor() {
+interface Props {
+	setText: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Editor({ setText }: Props) {
 	const [showInput, setShowInput] = useState("title");
 
 	return (
@@ -15,14 +19,14 @@ function Editor() {
 			</Options>
 
 			<Content>
-				{showInput === "paragraph" && <NewParagraph />}
+				{showInput === "paragraph" && <NewParagraph setText={setText} />}
 
-				{showInput === "title" && <NewTitle title="Título" />}
+				{showInput === "title" && <NewTitle title="Título" setText={setText} />}
 
-				{showInput === "subtitle" && <NewTitle title="Subtítulo" />}
+				{showInput === "subtitle" && (
+					<NewTitle title="Subtítulo" setText={setText} />
+				)}
 			</Content>
-
-			<AddButton>Adicionar</AddButton>
 		</Container>
 	);
 }
@@ -38,6 +42,8 @@ const Container = styled("div")({
 	flexDirection: "column",
 	justifyContent: "center",
 	gap: "50px",
+
+	height: "90%",
 });
 
 const Options = styled("div")({
@@ -52,17 +58,8 @@ const Button = styled("button")({
 	fontWeight: "bold",
 	padding: "10px",
 	borderRadius: "5px",
-});
-
-const AddButton = styled("button")({
-	backgroundColor: "#95a573",
-	padding: "10px",
-	width: "50%",
-	alignSelf: "center",
+	width: "20%",
 	textAlign: "center",
-	color: "#fff",
-	fontWeight: "bold",
-	borderRadius: "5px",
 });
 
 const Content = styled("div")({
